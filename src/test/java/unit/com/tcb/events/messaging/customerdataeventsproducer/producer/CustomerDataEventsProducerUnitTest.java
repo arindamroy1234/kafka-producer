@@ -42,8 +42,8 @@ public class CustomerDataEventsProducerUnitTest {
         //given
         Customer book = Customer.builder()
                 .customerId(123)
-                .customerAddress("Dilip")
-                .customerName("Kafka using Spring Boot")
+                .customerAddress("Arindam")
+                .customerName("Kafka")
                 .build();
 
         CustomerDataEvent libraryEvent = CustomerDataEvent.builder()
@@ -65,8 +65,8 @@ public class CustomerDataEventsProducerUnitTest {
         //given
         Customer book = Customer.builder()
                 .customerId(123)
-                .customerAddress("Dilip")
-                .customerName("Kafka using Spring Boot")
+                .customerAddress("Arindam")
+                .customerName("Kafka")
                 .build();
 
         CustomerDataEvent libraryEvent = CustomerDataEvent.builder()
@@ -76,8 +76,8 @@ public class CustomerDataEventsProducerUnitTest {
         String record = objectMapper.writeValueAsString(libraryEvent);
         SettableListenableFuture future = new SettableListenableFuture();
 
-        ProducerRecord<Integer, String> producerRecord = new ProducerRecord("library-events", libraryEvent.getCustomerDataEventId(),record );
-        RecordMetadata recordMetadata = new RecordMetadata(new TopicPartition("library-events", 1),
+        ProducerRecord<Integer, String> producerRecord = new ProducerRecord("customer-data-events", libraryEvent.getCustomerDataEventId(),record );
+        RecordMetadata recordMetadata = new RecordMetadata(new TopicPartition("customer-data-events", 1),
                 1,1,342,System.currentTimeMillis(), 1, 2);
         SendResult<Integer, String> sendResult = new SendResult<Integer, String>(producerRecord,recordMetadata);
 
